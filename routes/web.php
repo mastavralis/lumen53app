@@ -12,5 +12,11 @@
 */
 
 $app->get('/', function () use ($app) {
-    return $app->version();
+    $res['success'] = true;
+    $res['result'] = 'Hello world with lumen';
+    return response($res);
 });
+
+$app->post('/login', 'LoginController@index');
+$app->post('/register', 'UserController@register');
+$app->get('/user/{id}', ['middleware' => 'auth', 'uses' =>  'UserController@get_user']);
